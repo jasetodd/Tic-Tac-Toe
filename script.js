@@ -1,5 +1,3 @@
-
-
 const gameBoard = (() => {
   const board = ["", "", "", "", "", "", "", "", ""];
   const getBoard = () => board;
@@ -60,7 +58,6 @@ const gameController = (() => {
   const playRound = (index) => {
     const markerPlaced = gameBoard.setBoard(index, currentPlayer.marker);
     console.log(`Current board: ${gameBoard.getBoard()}`);
-    
 
     if (gameOver) {
       console.log("Game is over. Please reset the game to play again.");
@@ -93,3 +90,12 @@ const gameController = (() => {
 })();
 
 //winning conditions
+
+// const cells = document.querySelectorAll("[data-index]");
+// cells[1].innerHTML = "X";
+// cells[2].innerHTML = "O";
+
+
+// implement into the gameController. (keep ui and logic separate)
+// Find out how to put line through winning cells.
+// reset game button 
