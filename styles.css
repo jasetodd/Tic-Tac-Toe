@@ -66,8 +66,32 @@ h6 {
 #__next {
   isolation: isolate;
 }
-
-
+body {
+  background-color: grey;
+}
 h1 {
-  color: red;
+  color: darkslategrey;
+}
+
+.container {
+  display: block;
+  place-items: center;
+  
+}
+
+.game-board {
+  width: 50%;
+  aspect-ratio: 1 / 1;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.3rem;
+  justify-content: center; 
+  padding: .5rem;
+  background-color: lightgray;
+}
+
+.cell {
+  font-size: 1rem ;
+  place-items: center;
+  background-color: saddlebrown; 
 }
