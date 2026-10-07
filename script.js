@@ -11,6 +11,7 @@ const gameBoard = (() => {
   const resetBoard = () => {
     for (let i = 0; i < board.length; i++) {
       board[i] = "";
+      uiController.cells[i].innerHTML = "";
     }
   };
   return { resetBoard, getBoard, setBoard };
@@ -75,10 +76,10 @@ const gameController = (() => {
 
     if (checkWin()) {
       gameOver = true;
-      console.log(`${currentPlayer.name} wins!`);
+      alert(`${currentPlayer.name} wins!`);
     } else if (checkTie()) {
       gameOver = true;
-      console.log("It's a tie!");
+      alert("It's a tie!");
     } else {
       currentPlayer = currentPlayer === player1 ? player2 : player1;
     }
@@ -89,13 +90,30 @@ const gameController = (() => {
   };
 })();
 
-//winning conditions
+// event listeners for the cells, cell becomes index of the board array, and then call playRound with that index
 
-// const cells = document.querySelectorAll("[data-index]");
-// cells[1].innerHTML = "X";
-// cells[2].innerHTML = "O";
+const uiController = (() => {
+  const cells = document.querySelectorAll("[data-index]");
+  cells.forEach((cell) => {
+    cell.addEventListener("click", () => {
+      const index = parseInt(cell.getAttribute("data-index"));
+      console.log(`Cell clicked: ${index}`);
+      gameController.playRound(index);
+      cell.innerHTML = gameBoard.getBoard()[index];
+    });
+  });
+  return {
+    cells,
+  };
+})();
 
+const reset = (() => {
+  const resetButton = document.getElementById("reset-button");
+  resetButton.addEventListener("click", () => {
+    gameBoard.resetBoard();
+    console.log("Game reset.");
+  });
+})();
 
-// implement into the gameController. (keep ui and logic separate)
 // Find out how to put line through winning cells.
-// reset game button 
+// check tie, potential bug?

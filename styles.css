@@ -3,8 +3,6 @@
   https://www.joshwcomeau.com/css/custom-css-reset/
 */
 
-
-
 *,
 *::before,
 *::after {
@@ -87,20 +85,18 @@ h1 {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 0.3rem;
-  justify-content: center; 
-  padding: .5rem;
+  justify-content: center;
+  padding: 0.5rem;
   background-color: lightgray;
-  box-shadow: 1px 1px 3px darkgrey  ;
+  box-shadow: 1px 1px 3px darkgrey;
 }
 
 .cell {
   display: grid;
-  aspect-ratio: 1 / 1;;
+  aspect-ratio: 1 / 1;
   place-items: center;
-  background-color: saddlebrown; 
+  background-color: saddlebrown;
   font-size: 18cqw;
   line-height: 0;
-  
 }
-
 
