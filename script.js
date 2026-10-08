@@ -12,6 +12,7 @@ const gameBoard = (() => {
     for (let i = 0; i < board.length; i++) {
       board[i] = "";
       uiController.cells[i].innerHTML = "";
+      uiController.cells[i].classList.remove("winning-cell");
     }
   };
   return { resetBoard, getBoard, setBoard };
@@ -43,11 +44,15 @@ const gameController = (() => {
     const board = gameBoard.getBoard();
     return winningConditions.some((condition) => {
       const [a, b, c] = condition;
-      return (
+      if (
         board[a] === currentPlayer.marker &&
         board[b] === currentPlayer.marker &&
         board[c] === currentPlayer.marker
-      );
+      ) {
+        uiController.showWin([a, b, c]);
+        return true;
+      }
+      return false;
     });
   };
 
@@ -76,7 +81,7 @@ const gameController = (() => {
 
     if (checkWin()) {
       gameOver = true;
-      alert(`${currentPlayer.name} wins!`);
+
     } else if (checkTie()) {
       gameOver = true;
       alert("It's a tie!");
@@ -90,7 +95,6 @@ const gameController = (() => {
   };
 })();
 
-// event listeners for the cells, cell becomes index of the board array, and then call playRound with that index
 
 const uiController = (() => {
   const cells = document.querySelectorAll("[data-index]");
@@ -102,8 +106,16 @@ const uiController = (() => {
       cell.innerHTML = gameBoard.getBoard()[index];
     });
   });
+  const showWin = (winningCells) => {
+    winningCells.forEach((index) => {
+      const cell = document.querySelector(`[data-index="${index}"]`);
+      cell.classList.add("winning-cell");
+      
+    });
+  };
   return {
     cells,
+    showWin,
   };
 })();
 
@@ -115,5 +127,3 @@ const reset = (() => {
   });
 })();
 
-// Find out how to put line through winning cells.
-// check tie, potential bug?
